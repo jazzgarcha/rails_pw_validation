@@ -51,7 +51,7 @@ class RegistrationsTest < ApplicationSystemTestCase
     assert_text "Must include at least one Digit"
   end
 
-  test "password needs a be at least 8 digits" do
+  test "password needs a be at least 8 characters" do
     visit sign_up_url
 
     fill_in "Email", with: "hey@hey.com"

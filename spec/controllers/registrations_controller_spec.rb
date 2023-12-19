@@ -11,7 +11,7 @@ RSpec.describe "RegistrationsController", type: :request do
   end
 
   describe "Post #password_validation" do
-    it "requires a Symbol" do
+    it "requires a symbol" do
       post password_validation_url, as: :turbo_stream, params: { email: "test@test.com", password: "Password1" }
 
       expect(response.body).to include("Must include at least one Symbol")
@@ -26,7 +26,7 @@ RSpec.describe "RegistrationsController", type: :request do
 
       expect(response.body).to include("Must include at least one Lowercase")
     end
-    it "requires a Symbol" do
+    it "requires a digit" do
       post password_validation_url, as: :turbo_stream, params: { email: "test@test.com", password: "Password#" }
 
       expect(response.body).to include("Must include at least one Digit")
