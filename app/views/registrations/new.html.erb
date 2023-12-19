@@ -1,0 +1,42 @@
+<h1 class="mb-10">Sign Up</h1>
+<%= form_with(url: sign_up_path, data: {controller: "validation"}) do |form| %>
+  <div>
+    <%= form.label :email, class: "block text-gray-700 text-sm font-bold mb-2" %>
+    <ul id="email_validation">
+      <% @user.errors[:email].each do |error| %>
+        <li class="text-md font-bold text-red-500 text-sm"><%= error %></li>
+      <% end %>
+    </ul>
+    <%= form.email_field :email,
+        value: @user.email,
+        required: true,
+        autofocus: true,
+        autocomplete: "email",
+        class: "shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline mb-5"
+        %>
+  </div>
+  <div>
+    <%= form.label "Password (8 charactors with uppercase, lowercase, and symbol)", class: "block text-gray-700 text-sm font-bold mb-2" %>
+    <ul id="password_validation">
+      <% @user.errors[:password].each do |error| %>
+        <li class="text-md font-bold text-red-500 text-sm"><%= error %></li>
+      <% end %>
+    </ul>
+    <%= form.password_field :password,
+        required: true,
+        autocomplete: "new-password",
+        class: "shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline mb-5",
+        data: { action: "input->validation#passwordInput"}
+        %>
+  </div>
+
+  <div>
+    <%= form.button "Validate", formaction: password_validation_path, name: "passwordValidation", class: "invisible",
+    data: {validation_target: "runValidation"} %>
+  </div>
+
+  <div>
+    <%= form.submit "Sign up", class: "bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"  %>
+  </div>
+  <% end %>
+
